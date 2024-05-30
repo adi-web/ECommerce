@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    'crispy_forms',
+    "crispy_forms",
     "django_bootstrap5",
     'accounts',
     'shopOnline',
