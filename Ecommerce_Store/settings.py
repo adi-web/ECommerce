@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-ypr-0@t1v@b+ox344pv_^e&-tn$0ad7a@f%z$h(i+^ko69*%%a
 DEBUG = True
 
 ALLOWED_HOSTS = ['ecommerce-production-94fc.up.railway.app',"127.0.0.1"]
-CSRF_TRUSTED_ORIGINS=['https://ecommerce-production-94fc.up.railway.app']
+CSRF_TRUSTED_ORIGINS=['https://ecommerce-production-94fc.up.railway.app',"https://127.0.0.1"]
 
 
 SECRET_KEY = os.environ.get(
