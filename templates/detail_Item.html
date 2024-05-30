@@ -1,0 +1,20 @@
+{% extends 'base.html'%} }
+
+{% load static %}
+{% block content %}
+
+    <div class="card mb-3" style="max-width: 90%;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src={{ MEDIA_URL }}{{ detail_item.image }} class="img-fluid" alt="..." style="height:100%">
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h5 class="card-title">{{ detail_item.name }}</h5>
+        <p class="card-text">{{ detail_item.description }}</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

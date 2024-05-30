@@ -1,0 +1,10 @@
+[
+  {
+    "model": "shopOnline.item",
+    "pk": 1,
+    "fields": {"name": "admir mucaj", "image": "img/placeholder.png",
+      "quantityAvailable": 10, "price": 0.0,
+      "available": true,
+      "description": "funziona"}}
+
+]

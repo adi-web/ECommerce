@@ -1,0 +1,18 @@
+{% extends 'base.html'%} }
+{% block content %}
+<div style="text-align: center;padding-top: 5vw">
+    {% for item in list_items %}
+        <div class="card mt-2 ms-4" style="width: 18rem; display: inline-flex">
+            <img src={{ MEDIA_URL }}{{ item.image }} class="card-img-top" style="height: 15vw" >
+  <div class="card-body" style="float: left">
+    <h5 class="card-title" >{{ item.name }}</h5>
+    <p class="card-text" >{{ item.description }}</p>
+      <p class="card-text">Il prezzo è :{{ item.price }}</p>
+      <p class="card-text">Disponibili : {{ item.quantityAvailable }}</p>
+    <a href="{% url 'detail_item' item.pk %}" class="btn btn-primary">View detail </a>
+       <a href="#" class="btn btn-primary">Add to Cart </a>
+  </div>
+    </div>
+     {% endfor %}
+</div>
+{% endblock %}
