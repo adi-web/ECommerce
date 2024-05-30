@@ -25,8 +25,14 @@ SECRET_KEY = "django-insecure-ypr-0@t1v@b+ox344pv_^e&-tn$0ad7a@f%z$h(i+^ko69*%%a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://ecommerce-production-94fc.up.railway.app',"127.0.0.1"]
+CSRF_TRUSTED_ORIGINS=['https://ecommerce-production-94fc.up.railway.app']
 
+
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-p8^*24d55zm+rtz8b6i))=8wqz!t3emw=h2ztz+r$@0@%9(-06",
+)
 
 # Application definition
 
@@ -143,3 +149,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 CART_SESSION_ID = 'cart'
 
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+
+import dj_database_url
+
+db_from_env = dj_database_url.config()
+print(db_from_env)
+DATABASES['default'].update(db_from_env)
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
