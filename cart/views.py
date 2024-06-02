@@ -1,7 +1,8 @@
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import FormMixin
@@ -41,13 +42,16 @@ def cart_remove(request, product_id):
 
 class detailCart(FormMixin,View):
     #context_object_name = "list_cart"
-    #template_name = "cart/detail_cart.html"
+   #template_name = "cart/detail_cart.html"
     form_class = CartAddProductForm
 
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data()
         return render(request, 'cart/detail_cart.html', context)
+
+    def get_success_url(self):
+        return reverse('cart_detail')
 
     #def get_queryset(self):
        # Cart(self.request)
@@ -60,6 +64,26 @@ class detailCart(FormMixin,View):
 
         #print("ciao")
       #  return queryset
+
+
+
+        # add new Quantity i take the quantity and i save in the session cart
+
+    def post(self, request, *args, **kwargs):
+        #self.object = self.get_object()
+
+        form = CartAddProductForm(request.POST)
+        if form.is_valid():
+            cart = Cart(self.request)
+            form_detail = form.cleaned_data
+            print(form_detail)
+            cart.add(product_id=form_detail["item_id"], quantity=form_detail["quantity"], update_quantity=True)
+            print(request.session['cart'])
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.form_invalid(form)
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -78,18 +102,13 @@ class detailCart(FormMixin,View):
         i=0;
         session_item = self.request.session['cart']
         for item in items:
-            # Get the initial quantity for the item (replace this with your logic)
-            initial_quantity = 5
-            # Instantiate the form class with the initial quantity
-            form = CartAddProductForm(initial={'quantity': session_item[str(item.id)]['quantity']})
-            #print(session_item[str(item.id)]['quantity'])
-            #print(item.id)
+
+            form = CartAddProductForm(initial={'quantity': session_item[str(item.id)]['quantity'],'item_id':item.id})
+
             i=i+1
-            # Store the form instance in a dictionary with item ID as the key
+
             forms[item.id] = form
 
-
-        # Add the forms dictionary to the context
         context['forms'] = forms
         context['list_cart'] = items
         return context

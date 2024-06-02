@@ -7,4 +7,4 @@ class CartAddProductForm(forms.Form):
     quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES, coerce=int,
                                       widget=forms.Select(attrs={'onchange': 'submitQuantity(this)'}))
 
-
+    item_id = forms.IntegerField(widget=forms.HiddenInput())

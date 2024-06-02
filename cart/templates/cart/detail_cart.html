@@ -4,9 +4,9 @@
 {% block content %}
 
     <h1>Il tuo carello</h1>
-    <form  method="post">
-                                                {% csrf_token %}
+
     {% for item in list_cart %}
+
 
     <div class="card mb-3" style="max-width: 90%;height: 250px">
       <div class="row g-0">
@@ -20,8 +20,11 @@
            {% for item_id, form in forms.items %}
             <div>
             {% if item_id == item.id  %}
-            <h2>{{ form.instance.name }}</h2>  <!-- Assuming 'name' is a field in your Item model -->
+                <form action="{% url 'cart_detail' %}"  method="post">
+                {% csrf_token %}
+                        <h2>{{ form.instance.name }}</h2>  <!-- Assuming 'name' is a field in your Item model -->
                 {{ form.as_p }}
+                 </form>
             {% endif %}
 
             </div>
@@ -37,7 +40,7 @@
 
         {% endfor %}
     <input class="btn btn-primary" type="submit" value="Order the cart">
-    </form>
+
 
 
 {% endblock %}
