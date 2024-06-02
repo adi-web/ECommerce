@@ -49,7 +49,7 @@ class detailView(DetailView):
 
         return Item.objects.all()
 
-    #when i change the quantity i riderct to the same page html
+    #when i add the quantity i riderct to the same page html
     def get_success_url(self):
         return reverse('detail_item', kwargs={'pk': self.object.pk})
 
