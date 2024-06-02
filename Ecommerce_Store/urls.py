@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from shopOnline.views import listofItem
 
 urlpatterns = [
+
     path("admin/", admin.site.urls),
     path('',include('django.contrib.auth.urls')),
     path('accounts/',include('accounts.urls')),

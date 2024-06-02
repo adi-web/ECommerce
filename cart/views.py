@@ -33,10 +33,26 @@ def cart_add(request, product_id):
 
 
 def cart_remove(request, product_id):
+    print(product_id)
     cart = Cart(request)
     product = get_object_or_404(Item, id=product_id)
     cart.remove(product)
-    return redirect('cart:cart_detail')
+    return reverse('cart_detail')
+    #return HttpResponse("ok")
+
+
+class removeItem(DetailView):
+
+    def get_success_url(self):
+        return reverse('cart_detail')
+
+    def post(self, request, *args, **kwargs):
+        self.kwargs['product_id']
+        print(self.kwargs['product_id'])
+        cart = Cart(request)
+        product = get_object_or_404(Item, id=self.kwargs['product_id'])
+        cart.remove(product)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 

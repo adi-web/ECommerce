@@ -13,7 +13,7 @@
         <div class="col-md-3">
           <img src={{ MEDIA_URL }}{{ item.image }} class="img-fluid" alt="..." style="height:200px;width: -webkit-fill-available">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
           <div class="card-body">
             <h5 class="card-title">{{ item.name }}</h5>
             <p class="card-text">{{ item.description }}</p>
@@ -25,6 +25,10 @@
                         <h2>{{ form.instance.name }}</h2>  <!-- Assuming 'name' is a field in your Item model -->
                 {{ form.as_p }}
                  </form>
+                <form action="{% url 'remove_item' item.pk %}"  method="post">
+                    {% csrf_token %}
+                     <input type="submit" href={% url 'remove_item' item.pk %} class="btn btn-danger style="float: right" value="Delete Item From Cart">
+                    </form>
             {% endif %}
 
             </div>

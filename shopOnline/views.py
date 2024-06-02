@@ -20,12 +20,12 @@ class listofItem(ListView):
 
     context_object_name = "list_items"
     queryset=Item.objects.all()
-    template_name = "shop.html"
+    template_name = "shopOnline/shop.html"
 
 class detailView(DetailView):
     model = Item
     context_object_name = "detail_item"
-    template_name = "detail_Item.html"
+    template_name = "shopOnline/detail_Item.html"
     #form_class = CartAddProductForm
 
     def get_queryset(self):
