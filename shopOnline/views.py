@@ -19,16 +19,34 @@ from shopOnline.models import Item
 class listofItem(ListView):
 
     context_object_name = "list_items"
-    queryset=Item.objects.all()
+    #queryset=Item.objects.filter()
     template_name = "shopOnline/shop.html"
+
+    def get_queryset(self, *args, **kwargs):
+
+
+        #look in the url id for categori
+        pk_list = self.kwargs
+
+        #print(pk_list)
+
+        #if i want all the category todisplay i do not have id in the url
+        if pk_list =={}:
+            queryset = Item.objects.filter()
+        else:
+            queryset = Item.objects.filter(pk=pk_list['pk'])
+            print('ciao')
+            print(pk_list)
+
+        return queryset
 
 class detailView(DetailView):
     model = Item
     context_object_name = "detail_item"
     template_name = "shopOnline/detail_Item.html"
-    #form_class = CartAddProductForm
 
     def get_queryset(self):
+
         return Item.objects.all()
 
     #when i change the quantity i riderct to the same page html

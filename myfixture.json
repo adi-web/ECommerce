@@ -1,11 +1,14 @@
 [
+
   {
     "model": "shopOnline.item",
     "pk": 1,
     "fields": {"name": "admir mucaj", "image": "images/placeholder.png",
       "quantityAvailable": 10, "price": 0.0,
       "available": true,
-      "description": "funziona"}
+      "description": "funziona",
+      "categories": 1
+      }
   },
 
   {
@@ -14,7 +17,10 @@
     "fields": {"name": "Libro", "image": "images/1.png",
       "quantityAvailable": 10, "price":20.0,
       "available": true,
-      "description": "Questo è un linbro"}
-  }
+      "description": "Questo è un linbro",
+      "categories": 2
+      }
 
+  }
 ]
+

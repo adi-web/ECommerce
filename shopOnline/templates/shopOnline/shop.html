@@ -2,6 +2,18 @@
 {% load static %}
 {% block content %}
 <div style="text-align: center;padding-top: 5vw">
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href={% url 'shop' %}>All Item </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href={% url 'shopCategoria' 2 %}>Informatica</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href={% url 'shopCategoria' 1 %}>Cucina</a>
+  </li>
+
+</ul>
     {% for item in list_items %}
         <div class="card mt-2 ms-4" style="width: 18rem; display: inline-flex">
             <img src={{ MEDIA_URL }}{{ item.image }} class="card-img-top" style="height: 15vw" >

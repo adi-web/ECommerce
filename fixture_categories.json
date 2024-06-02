@@ -1,0 +1,17 @@
+[
+
+  {
+    "model": "shopOnline.categories",
+    "pk": 1,
+    "fields": {"name": "Informatica"
+      }
+  },
+
+  {
+    "model": "shopOnline.categories",
+    "pk": 2,
+    "fields": {"name": "Cucina"
+      }
+
+  }
+]

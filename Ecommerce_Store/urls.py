@@ -29,6 +29,7 @@ urlpatterns = [
     path('shop/',include('shopOnline.urls')),
     path('cart/', include('cart.urls')),
     path('',listofItem.as_view(),name='shop'),
+    path('categoria/<int:pk>',listofItem.as_view(),name='shopCategoria'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
