@@ -2,15 +2,18 @@
 {% load static %}
 {% block content %}
 <div style="text-align: center;padding-top: 5vw">
-<ul class="nav justify-content-center">
+<div style="float: left;">
+<h3>Sei nella categoria : {{ nameCategory }}</h3>
+</div>
+<ul class="nav justify-content-center" style="margin-top: 50px">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href={% url 'shop' %}>All Item </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href={% url 'shopCategoria' 2 %}>Informatica</a>
+    <a class="nav-link" href={% url 'shopCategoria' 1 %}>Informatica</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href={% url 'shopCategoria' 1 %}>Cucina</a>
+    <a class="nav-link" href={% url 'shopCategoria' 2 %}>Cucina</a>
   </li>
 
 </ul>

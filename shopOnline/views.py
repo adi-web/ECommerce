@@ -13,7 +13,7 @@ from cart import cart
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 
-from shopOnline.models import Item
+from shopOnline.models import Item, Categories
 
 
 class listofItem(ListView):
@@ -23,7 +23,6 @@ class listofItem(ListView):
     template_name = "shopOnline/shop.html"
 
     def get_queryset(self, *args, **kwargs):
-
 
         #look in the url id for categori
         pk_list = self.kwargs
@@ -35,10 +34,27 @@ class listofItem(ListView):
             queryset = Item.objects.filter()
         else:
             queryset = Item.objects.filter(pk=pk_list['pk'])
-            print('ciao')
+
             print(pk_list)
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk_list = self.kwargs
+        if pk_list =={}:
+            context["nameCategory"]="All Category"
+        else:
+            queryC=Item.objects.filter(pk=pk_list['pk']).select_related("categories").all()
+
+            for item in queryC:
+                context["nameCategory"] = item.categories.name
+
+        return context
+
+
+
+
 
 class detailView(DetailView):
     model = Item
