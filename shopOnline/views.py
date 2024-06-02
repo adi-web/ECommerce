@@ -25,7 +25,7 @@ class listofItem(ListView):
 class detailView(FormMixin,DetailView):
     model = Item
     context_object_name = "detail_item"
-    template_name = "detail_item.html"
+    template_name = "detail_Item.html"
     form_class = CartAddProductForm
 
     def get_queryset(self):
