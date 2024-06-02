@@ -58,7 +58,7 @@ class detailView(FormMixin,DetailView):
 
         return context
 
-    #take from the cart the actual quantity to display in detail_item
+    #take from the cart the actual quantity (or default quantity if i did not choose) to display in detail_item
     def get_initial(self):
         initial = super().get_initial()
         cart = Cart(self.request)

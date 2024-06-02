@@ -76,11 +76,14 @@ class detailCart(FormMixin,View):
         # Create a form instance for each item with its initial quantity
         forms = {}
         i=0;
+        session_item = self.request.session['cart']
         for item in items:
             # Get the initial quantity for the item (replace this with your logic)
             initial_quantity = 5
             # Instantiate the form class with the initial quantity
-            form = CartAddProductForm(initial={'quantity': initial_quantity+i})
+            form = CartAddProductForm(initial={'quantity': session_item[str(item.id)]['quantity']})
+            #print(session_item[str(item.id)]['quantity'])
+            #print(item.id)
             i=i+1
             # Store the form instance in a dictionary with item ID as the key
             forms[item.id] = form
