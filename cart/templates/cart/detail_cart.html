@@ -1,0 +1,43 @@
+{% extends 'base.html'%} }
+
+{% load static %}
+{% block content %}
+
+    <h1>Il tuo carello</h1>
+    <form  method="post">
+                                                {% csrf_token %}
+    {% for item in list_cart %}
+
+    <div class="card mb-3" style="max-width: 90%;height: 250px">
+      <div class="row g-0">
+        <div class="col-md-3">
+          <img src={{ MEDIA_URL }}{{ item.image }} class="img-fluid" alt="..." style="height:200px;width: -webkit-fill-available">
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+           {% for item_id, form in forms.items %}
+            <div>
+            {% if item_id == item.id  %}
+            <h2>{{ form.instance.name }}</h2>  <!-- Assuming 'name' is a field in your Item model -->
+                {{ form.as_p }}
+            {% endif %}
+
+            </div>
+        {% endfor %}
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+        {% endfor %}
+    <input class="btn btn-primary" type="submit" value="Order the cart">
+    </form>
+
+
+{% endblock %}

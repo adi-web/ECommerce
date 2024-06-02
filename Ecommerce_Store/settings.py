@@ -143,9 +143,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "shop"
 LOGOUT_REDIRECT_URL = "shop"
 
-SESSION_COOKIE_AGE = 60
+
 SESSION_EXPIRE_SECONDS = 2000 # Expire after 30 minutes
 SESSION_TIMEOUT_REDIRECT = 'shop' # Add your URL
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE=False
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

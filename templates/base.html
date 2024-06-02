@@ -34,6 +34,11 @@
          <div>
 
             <ul class="nav link-light" style="color: white">
+            <li class="nav-item">
+                    <a class="nav-link" style="color: white" href="{% url 'cart_detail' %}">Carrello
+
+                    </a>
+                </li>
                 {% if user.is_authenticated %}Hi {{ user.id }}!
                     <li class="nav-item">
         <form action="{% url 'logout' %}" method="post">
@@ -41,13 +46,12 @@
         <button type="submit">Log Out</button>
         </form>
                           </li>
+
                  {% else %}
                 <li class="nav-item">
                     <a class="nav-link" style="color: white" href="{% url 'login' %}">Login
 
                     </a>
-
-
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: white" href="{% url 'signup' %}">Sign up

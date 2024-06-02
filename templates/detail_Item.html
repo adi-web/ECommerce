@@ -14,7 +14,19 @@
         <p class="card-text">{{ detail_item.description }}</p>
 
       </div>
+
+
+       <form action="{% url 'detail_item' detail_item.pk %}" method="post">
+                                                {% csrf_token %}
+                                               {{form}}
+
+                                                <input class="btn btn-primary" type="submit"
+                                                    value="Add New Quantity">
+                                            </form>
+
     </div>
-  </div>
+    </div>
 </div>
 {% endblock %}
+
+
