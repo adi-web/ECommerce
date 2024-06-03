@@ -1,7 +1,7 @@
 {% extends 'base.html' %} }
 {% load static %}
 {% block content %}
-<div style="text-align: center;padding-top: 5vw">
+<div style="text-align: center;padding-top: 1vw">
 <div style="float: left;">
 <h3>Sei nella categoria : {{ nameCategory }}</h3>
 </div>
@@ -15,7 +15,6 @@
   <li class="nav-item">
     <a class="nav-link" href={% url 'shopCategoria' 2 %}>Cucina</a>
   </li>
-
 </ul>
     {% for item in list_items %}
         <div class="card mt-2 ms-4" style="width: 18rem; display: inline-flex">

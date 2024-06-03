@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['ecommerce-production-94fc.up.railway.app',"127.0.0.1"]
 CSRF_TRUSTED_ORIGINS=['https://ecommerce-production-94fc.up.railway.app','https://127.0.0.1']
 #//python manage.py loaddata my_app/fixtures.json
+#python manage.py flush
+
 
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "django_bootstrap5",
+    "crispy_bootstrap5",
     'accounts',
     'shopOnline',
     'cart'
@@ -158,7 +161,8 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 import dj_database_url
 
@@ -167,3 +171,6 @@ print(db_from_env)
 DATABASES['default'].update(db_from_env)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = "accounts.CustomUser"
