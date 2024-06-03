@@ -1,1 +1,1 @@
-web:  python manage.py flush && python manage.py makemigrations && python manage.py migrate  && python manage.py loaddata fixture_categories.json &&python manage.py loaddata myfixture.json && python manage.py collectstatic --noinput && gunicorn Ecommerce_Store.wsgi --log-file -
+web: python manage.py makemigrations && python manage.py migrate  && python manage.py loaddata fixture_categories.json &&python manage.py loaddata myfixture.json && python manage.py collectstatic --noinput && gunicorn Ecommerce_Store.wsgi --log-file -
