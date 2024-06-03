@@ -23,7 +23,7 @@ from shopOnline.views import listofItem
 
 urlpatterns = [
 
-    #path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls),
     path('',include('django.contrib.auth.urls')),
     path('accounts/',include('accounts.urls')),
     path('shop/',include('shopOnline.urls')),
