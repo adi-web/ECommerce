@@ -107,24 +107,28 @@ class detailCart(FormMixin,View):
         # Retrieve items from the database (or from wherever you get them)
         Cart(self.request)
         a = self.request.session['cart']
+
         item_id_cart = []
         for item in a:
             item_id_cart.append(int(item))
 
         items = Item.objects.filter(pk__in=item_id_cart)
 
-        # Create a form instance for each item with its initial quantity
+        # Create a form instance for each item with his initial quantity
         forms = {}
         i=0;
         session_item = self.request.session['cart']
+        pay=0
         for item in items:
 
             form = CartAddProductForm(initial={'quantity': session_item[str(item.id)]['quantity'],'item_id':item.id})
-
+            pay=pay+int(session_item[str(item.id)]['quantity'])*item.price
+            print("da pagare")
+            print(pay)
             i=i+1
 
             forms[item.id] = form
-
+        context['pay']=pay
         context['forms'] = forms
         context['list_cart'] = items
         return context

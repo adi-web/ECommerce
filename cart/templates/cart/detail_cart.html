@@ -4,11 +4,12 @@
 {% block content %}
 
     <h1>Il tuo carello</h1>
-
+    <div class="container-fluid" style="display: flex">
+    <div class="col-10">
     {% for item in list_cart %}
 
 
-    <div class="card mb-3" style="max-width: 90%;height: 250px">
+    <div class="card mb-3" style="max-width: 100%;height: 250px">
       <div class="row g-0">
         <div class="col-md-3">
           <img src={{ MEDIA_URL }}{{ item.image }} class="img-fluid" alt="..." style="height:200px;width: -webkit-fill-available">
@@ -43,8 +44,11 @@
     </div>
 
         {% endfor %}
-    <input class="btn btn-primary" type="submit" value="Order the cart">
+    </div>
+    <div class="col-2 ms-4" style="position: fixed;right: 0">
+    <h5>Total to pay: {{ pay }}</h5>
+    <a class="btn btn-primary" href={% url 'detail_orders' %}  type="submit" value="Order the cart" >Process the order </a>
+    </div>
 
-
-
+</div>
 {% endblock %}

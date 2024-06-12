@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'accounts',
     'shopOnline',
-    'cart'
+    'cart',
+    'order'
 ]
 
 MIDDLEWARE = [
@@ -172,4 +173,4 @@ DATABASES['default'].update(db_from_env)
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-AUTH_USER_MODEL = "accounts.CustomUser"
+#AUTH_USER_MODEL = "accounts.CustomUser"

@@ -12,6 +12,7 @@ from django.views.generic.edit import FormMixin
 from cart import cart
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
+from shopOnline.forms import AddQuantity
 
 from shopOnline.models import Item, Categories
 
@@ -19,7 +20,6 @@ from shopOnline.models import Item, Categories
 class listofItem(ListView):
 
     context_object_name = "list_items"
-    #queryset=Item.objects.filter()
     template_name = "shopOnline/shop.html"
 
     def get_queryset(self, *args, **kwargs):
@@ -33,9 +33,8 @@ class listofItem(ListView):
         if pk_list =={}:
             queryset = Item.objects.filter()
         else:
-            queryset = Item.objects.filter(pk=pk_list['pk'])
-
-            print(pk_list)
+            queryset = Item.objects.filter(categories=pk_list['pk'])
+            print(queryset.values())
 
         return queryset
 
@@ -50,16 +49,28 @@ class listofItem(ListView):
             for item in queryC:
                 context["nameCategory"] = item.categories.name
 
+        item_id_cart = []
+        Cart(self.request)
+        if self.request.session['cart']:
+            session_cart = self.request.session['cart']
+
+            for item in session_cart:
+                item_id_cart.append(int(item))
+
+            print(item_id_cart)
+            context["cart_id"]=item_id_cart
+
         return context
 
 
 
 
 
-class detailView(DetailView):
+class detailView(FormMixin,DetailView):
     model = Item
     context_object_name = "detail_item"
     template_name = "shopOnline/detail_Item.html"
+    form_class = AddQuantity
 
     def get_queryset(self):
 
@@ -73,7 +84,9 @@ class detailView(DetailView):
     #add new Quantity i take the quantity and i save in the session cart
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        #form = self.get_form()
+        form = AddQuantity(request.POST)
+        print("questo è form")
+
 
 
         #if form.is_valid():
@@ -81,11 +94,17 @@ class detailView(DetailView):
         cart = Cart(self.request)
         session_item = self.request.session['cart']
         for id_item in request.session['cart']:
-            print(self.object.pk)
+
             print("c")
             if id_item == str(self.object.pk):
-                print("entra")
-                cart.add(product_id=self.object.pk, quantity=session_item[id_item]['quantity']+1, update_quantity=True)
+                if form.is_valid():
+                    form_detail = form.cleaned_data
+                    if form_detail["quantiyt_item"]< session_item[id_item]['quantity']:
+                        cart.add(product_id=self.object.pk, quantity=session_item[id_item]['quantity'] - 1, update_quantity=True)
+                    else:
+                        print("entra")
+                        cart.add(product_id=self.object.pk, quantity=session_item[id_item]['quantity']+1, update_quantity=True)
+
                 return HttpResponseRedirect(self.get_success_url())
 
         cart.add(product_id=self.object.pk, quantity=1, update_quantity=True)
@@ -101,10 +120,11 @@ class detailView(DetailView):
        # context['form'] = self.get_form()
         #context['form']
         session_item = self.request.session['cart']
+
         for id_item in self.request.session['cart']:
             print("entr")
             if id_item == str(self.object.pk):
-                context['prova']="Item added in the Cart , There are in the Cart :  "
+
                 context['itemcart']=session_item[id_item]["quantity"]
 
         return context

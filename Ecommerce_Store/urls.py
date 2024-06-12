@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('shop/',include('shopOnline.urls')),
     path('cart/', include('cart.urls')),
+    path('order/', include('order.urls')),
     path('',listofItem.as_view(),name='shop'),
     path('categoria/<int:pk>',listofItem.as_view(),name='shopCategoria'),
 ]

@@ -3,10 +3,10 @@
   {
     "model": "shopOnline.item",
     "pk": 1,
-    "fields": {"name": "admir mucaj", "image": "images/placeholder.png",
-      "quantityAvailable": 10, "price": 0.0,
+    "fields": {"name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit", "image": "images/covercomputer.jpg",
+     "price":15.99,
       "available": true,
-      "description": "funziona",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel est a justo malesuada porta. Ut congue quam ut tempus sagittis. Pellentesque elit quam, feugiat venenatis tortor sit amet, sollicitudin varius nulla.",
       "categories": 1
       }
   },
@@ -14,11 +14,33 @@
   {
     "model": "shopOnline.item",
     "pk": 2,
-    "fields": {"name": "Libro", "image": "images/1.png",
-      "quantityAvailable": 10, "price":20.0,
+    "fields": {"name": "Vivamus gravida, metus id dignissim molestie, nisl risus accumsan nibh.", "image": "images/impastatrice.jpg",
+       "price":100.50,
       "available": true,
-      "description": "Questo è un linbro",
+      "description": "Vivamus gravida, metus id dignissim molestie, nisl risus accumsan nibh, sed blandit metus mi ut mi. Donec vestibulum suscipit leo, ac aliquet erat rutrum in. Donec vel velit eget nulla auctor venenatis. Etiam ac lorem pharetra, auctor magna non, maximus urna. Vestibulum non lacus id enim rutrum vulputate.",
       "categories": 2
+      }
+
+  },
+    {
+    "model": "shopOnline.item",
+    "pk": 3,
+    "fields": {"name": "Nullam id neque rhoncus ex porta porttitor vel et est. Pellentesque efficitur tortor enim.", "image": "images/mouse.jpg",
+    "price":10.50,
+      "available": true,
+      "description": "Nullam id neque rhoncus ex porta porttitor vel et est. Pellentesque efficitur tortor enim, a consequat felis faucibus tempus. Nunc id malesuada mi. Ut iaculis mi non volutpat volutpat.",
+      "categories": 1
+      }
+
+  },
+  {
+    "model": "shopOnline.item",
+    "pk": 4,
+    "fields": {"name": "Ut in rutrum lectus. Nullam iaculis, elit sit amet aliquet malesuada, neque eros rhoncus magna.", "image": "images/tastiera.jpg",
+     "price":8.70,
+      "available": true,
+      "description": "Ut in rutrum lectus. Nullam iaculis, elit sit amet aliquet malesuada, neque eros rhoncus magna, nec vulputate urna libero sit amet ipsum. Phasellus dapibus varius viverra. Fusce ullamcorper leo quis nulla consequat, ac ultrices lorem maximus.",
+      "categories": 1
       }
 
   }
