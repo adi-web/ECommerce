@@ -3,12 +3,11 @@
 {% load static %}
 {% block content %}
 
-    <h1>Il tuo carello</h1>
+    {% if list_cart  %}
+    <h1>Your cart</h1>
     <div class="container-fluid" style="display: flex">
     <div class="col-10">
     {% for item in list_cart %}
-
-
     <div class="card mb-3" style="max-width: 100%;height: 250px">
       <div class="row g-0">
         <div class="col-md-3">
@@ -34,10 +33,6 @@
 
             </div>
         {% endfor %}
-
-
-
-
           </div>
         </div>
       </div>
@@ -46,9 +41,21 @@
         {% endfor %}
     </div>
     <div class="col-2 ms-4" style="position: fixed;right: 0">
+
     <h5>Total to pay: {{ pay }}</h5>
-    <a class="btn btn-primary" href={% url 'detail_orders' %}  type="submit" value="Order the cart" >Process the order </a>
+       <form action="{% url 'process_cart' %}" >
+                {% csrf_token %}
+                         <input class="btn btn-primary"   type="submit" value="Process the order" >
+
+                 </form>
+
+
+
+
     </div>
 
 </div>
+        {% else %}
+        <h4>Your cart is empty</h4>
+      {% endif %}
 {% endblock %}

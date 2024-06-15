@@ -60,6 +60,8 @@ class listofItem(ListView):
             print(item_id_cart)
             context["cart_id"]=item_id_cart
 
+        print("user e ")
+        print(self.request.user.pk)
         return context
 
 
@@ -94,8 +96,6 @@ class detailView(FormMixin,DetailView):
         cart = Cart(self.request)
         session_item = self.request.session['cart']
         for id_item in request.session['cart']:
-
-            print("c")
             if id_item == str(self.object.pk):
                 if form.is_valid():
                     form_detail = form.cleaned_data

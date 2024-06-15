@@ -1,0 +1,22 @@
+{% extends 'base.html'%} }
+
+{% load static %}
+{% block content %}
+{% for b in list_itemsOrder|slice:":1" %}
+    <h1> Your Order number is : {{ b.order.pk }}</h1>
+
+{% endfor %}
+ {% for a in list_itemsOrder %}
+
+        <div class="card mt-2 ms-4" style="width: 18rem; display: inline-flex;height: 26vw">
+         <a href="{% url 'detail_item' a.item.pk%}">
+            <img  src={{ MEDIA_URL }}{{ a.item.image }} class="card-img-top" style="height: 15vw" > </a>
+  <div class="card-body" style="text-align: left">
+      <a href="{% url 'detail_item' a.item.pk%}" class="link-offset-2 link-underline link-underline-opacity-0" style="text-decoration: none;color: black;}"> <h6 class="card-title" style=":hover {color: blue}:visited {color: cornflowerblue}" >{{ a.item.name }}</h6> </a>
+      <h5>Quantity buyied: {{ a.quantity }}</h5>
+      <h5 style="left: 0">Price: {{ a.item.price }} $</h5>
+
+  </div>
+    </div>
+     {% endfor %}
+{% endblock %}

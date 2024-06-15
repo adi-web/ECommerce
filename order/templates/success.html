@@ -1,0 +1,7 @@
+{% extends 'base.html'%} }
+
+{% block content %}
+<h1>Your order is confirmed</h1>
+    <a href="{% url 'detail_orders' %}"> <button class="btn btn-success">See list of your order</button></a>
+     <a href="{% url 'shop' %}"> <button class="btn btn-success">Go to shop</button></a>
+{% endblock %}

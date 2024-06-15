@@ -41,7 +41,7 @@ def cart_remove(request, product_id):
     #return HttpResponse("ok")
 
 
-class removeItem(DetailView):
+class removeItem(View):
 
     def get_success_url(self):
         return reverse('cart_detail')

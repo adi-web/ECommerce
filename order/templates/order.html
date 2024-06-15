@@ -2,5 +2,35 @@
 
 {% load static %}
 {% block content %}
-<p>Funziona</p>
+
+    <h1>Your Order</h1>
+    <div class="container-fluid" style="display: flex">
+    <div class="col-10">
+    {% for order_info in order %}
+
+    <form action="{% url 'item_order' order_info.pk %}">
+    <div class="card mb-3" style="max-width: 100%;height: 250px">
+      <div class="row g-0">
+        <div class="col-md-9">
+          <div class="card-body">
+              <h5 class="card-title">Number order: {{order_info.pk}}</h5>
+              <h3>Info order: </h3>
+            <ul>
+                <li><p class="card-text">Address to ship: {{ order_info.addressOrder }}</p></li>
+                <li> <p class="card-title">Number phone: {{order_info.phoneNumber}}</p></li>
+                <li> <p class="card-title">Tot paid: {{order_info.totpay}}</p></li>
+
+            </ul>
+            </div>
+
+        </div>
+
+    </div>
+        <input type="submit" class="btn btn-success" style="width: 10vw;ms:10px" value="see detail order">
+    </div>
+
+    </form>
+        </div>
+        </div>
+    {% endfor %}
 {% endblock %}

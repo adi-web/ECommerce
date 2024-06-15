@@ -2,7 +2,6 @@
 
 {% load static %}
 {% block content %}
-
     <div class="card mb-3" style="max-width: 90%;">
   <div class="row g-0">
     <div class="col-md-4">
@@ -10,21 +9,17 @@
     </div>
     <div class="col-md-6">
       <div class="card-body">
-        <h5 class="card-title">{{ detail_item.name }}</h5>
-        <p class="card-text">{{ detail_item.description }}</p>
-
+        <h5 class="card-title"> {{ detail_item.name }}</h5>
+        <p class="card-text">Description: {{ detail_item.description }}</p>
+       <p class="card-text">Price: {{ detail_item.price }}</p>
           {% if itemcart %}
-
             <p><i class="bi bi-cart-check" style="font-size: xxx-large"></i> </p>
            <div class="input-group" style="width: 200px;">
           <span class="input-group-btn">
-
                <form action="{% url 'detail_item' detail_item.pk %}" method="post">
                     {% csrf_token %}
-
                     <input type="hidden" name="{{ form.quantiyt_item.name }}" value="{{ itemcart|add:-1 }}">
-                   <button class="btn btn-primary " style="margin-right: 25px" type="submit"
-                           value="Add to the cart"  ><i class="bi bi-dash-circle" style="font-size: x-large"></i></button>
+                   <button class="btn btn-primary " style="margin-right: 25px" type="submit" value="Add to the cart"  ><i class="bi bi-dash-circle" style="font-size: x-large"></i></button>
                   </form>
           </span>
           <input type="text" name="quant[1]" class="form-control input-number" value="{{ itemcart }}" min="1" max="50">
@@ -43,11 +38,9 @@
       </div>
               {% else %}
        <form action="{% url 'detail_item' detail_item.pk %}" method="post">
-                                                {% csrf_token %}
-                                                <input class="btn btn-primary ms-4" type="submit"
-                                                    value="Add to the cart"  >
-                                            </form>
-
+           {% csrf_token %}
+           <input class="btn btn-primary ms-4" type="submit" value="Add to the cart"  >
+       </form>
          {% endif %}
 
 
