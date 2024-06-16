@@ -4,7 +4,7 @@
 {% block content %}
     <div class="card mb-3" style="max-width: 90%;">
   <div class="row g-0">
-    <div class="col-md-4">
+    <div class="col-md-4" style="height: 32vw">
       <img src={{ MEDIA_URL }}{{ detail_item.image }} class="img-fluid" alt="..." style="height:100%">
     </div>
     <div class="col-md-6">
@@ -41,8 +41,30 @@
            {% csrf_token %}
            <input class="btn btn-primary ms-4" type="submit" value="Add to the cart"  >
        </form>
+
          {% endif %}
 
+
+
+
+    <h1 style="margin-top: 25px;margin-bottom: 10px">Comments:</h1>
+    {% if user.is_authenticated %}
+         <a href="{% url 'comment_create' detail_item.pk %}"><button class="btn btn-primary" style="margin-bottom: 10px">Add Comment</button></a>
+    {% endif %}
+
+    <ol class="list-group ">
+        {% for c in comments %}
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Customer: {{ c.customer}}</div>
+                Comment: {{ c.description }}
+            {% if user.is_authenticated and user.pk == c.customer.pk %}
+                <a href="{% url 'comment_delete' detail_item.pk c.pk %}">Delete</a>
+            {% endif %}
+        </div>
+      </li>
+        {% endfor %}
+    </ol>
 
     </div>
     </div>

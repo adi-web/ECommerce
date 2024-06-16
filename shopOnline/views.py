@@ -12,6 +12,7 @@ from django.views.generic.edit import FormMixin
 from cart import cart
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
+from comment.models import CommentItem
 from shopOnline.forms import AddQuantity
 
 from shopOnline.models import Item, Categories
@@ -126,7 +127,22 @@ class detailView(FormMixin,DetailView):
             if id_item == str(self.object.pk):
 
                 context['itemcart']=session_item[id_item]["quantity"]
+        #queryCommet=CommentItem.objects.filter(itemComment_id=self.object.pk)
+        queryCommet = CommentItem.objects.all()
 
+        comment=[]
+        for c in queryCommet:
+            comment.append(c)
+
+
+
+        print("dopo for")
+        for o in comment:
+            print(o.pk)
+#        context['names']=queryCommet.get().customer
+        context['comments'] = comment
+        print('comments')
+        print(queryCommet.values())
         return context
 
     #take from the cart the actual quantity (or default quantity if i did not choose) to display in detail_item

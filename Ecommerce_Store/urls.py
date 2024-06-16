@@ -31,6 +31,7 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('',listofItem.as_view(),name='shop'),
     path('categoria/<int:pk>',listofItem.as_view(),name='shopCategoria'),
+    path("comment/", include("comment.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

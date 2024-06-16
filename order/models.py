@@ -1,3 +1,4 @@
+import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -5,7 +6,7 @@ from shopOnline.models import Item
 # Create your models here.
 
 class Order(models.Model):
-    datetime=models.DateTimeField
+    date=models.DateField(default=datetime.date.today())
     phoneNumber=models.CharField(max_length=200, db_index=True, blank=True)
     addressOrder=models.CharField(max_length=200, db_index=True, blank=True)
     userOrder=models.ForeignKey(User,on_delete=models.CASCADE,null=True)

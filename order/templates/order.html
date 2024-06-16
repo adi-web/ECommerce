@@ -3,13 +3,13 @@
 {% load static %}
 {% block content %}
 
-    <h1>Your Order</h1>
+    <h1>Your list of order</h1>
     <div class="container-fluid" style="display: flex">
     <div class="col-10">
     {% for order_info in order %}
 
     <form action="{% url 'item_order' order_info.pk %}">
-    <div class="card mb-3" style="max-width: 100%;height: 250px">
+    <div class="card mb-3" style="max-width: 100%;height: 300px">
       <div class="row g-0">
         <div class="col-md-9">
           <div class="card-body">
@@ -18,17 +18,14 @@
             <ul>
                 <li><p class="card-text">Address to ship: {{ order_info.addressOrder }}</p></li>
                 <li> <p class="card-title">Number phone: {{order_info.phoneNumber}}</p></li>
+                <li> <p class="card-title">Date ordered: {{order_info.date}}</p></li>
                 <li> <p class="card-title">Tot paid: {{order_info.totpay}}</p></li>
-
             </ul>
             </div>
-
         </div>
-
     </div>
-        <input type="submit" class="btn btn-success" style="width: 10vw;ms:10px" value="see detail order">
+        <input type="submit" class="btn btn-success" style="width: 10vw;margin-left: 10px" value="see detail order">
     </div>
-
     </form>
         </div>
         </div>

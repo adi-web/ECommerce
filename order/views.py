@@ -27,7 +27,6 @@ class orderList(ListView):
 class processOrder(CreateView):
     form_class = OrderForms
     template_name = 'processOrder.html'
-    success_url = reverse_lazy('detail_orders')
 
 class listOrder(ListView):
     model = Item

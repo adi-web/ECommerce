@@ -1,11 +1,11 @@
 {% extends 'base.html'%} }
-
+{% load crispy_forms_tags %}
 {% block content %}
     <div style="margin-top: 10px">
     <h1>Insert info for the ship of your order: </h1>
 <form action="{% url 'detail_orders' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <input type="submit" class="btn btn-success " value="Confirm order" >
 </form>
 
