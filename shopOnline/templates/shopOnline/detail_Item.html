@@ -10,8 +10,8 @@
     <div class="col-md-6">
       <div class="card-body">
         <h2 class="card-title"> {{ detail_item.name }}</h2>
-        <p class="card-text">Description: {{ detail_item.description }}</p>
-       <p class="card-text">Price: {{ detail_item.price }}</p>
+        <h5> Description: </h5> <p class="card-text">{{ detail_item.description }}</p>
+       <p class="card-text"><h5>Price: {{ detail_item.price }} $</h5> </p>
           {% if itemcart %}
             <p><i class="bi bi-cart-check" style="font-size: xxx-large"></i> </p>
            <div class="input-group" style="width: 200px;">
@@ -48,13 +48,13 @@
 
 
 
-    {% if user.is_authenticated and exists == False %}
+    {% if user.is_authenticated and exists == False and existsOrder == True %}
 
-         <a href="{% url 'comment_create' detail_item.pk %}"><button class="btn btn-primary" style="margin-bottom: 10px">Add Comment</button></a>
+         <a href="{% url 'comment_create' detail_item.pk %}"><button class="btn btn-light" style="margin-bottom: 30px; margin-top: 20px;float: right">Write a cutomer review</button></a>
 
     {% endif %}
    {% if comments %}
-        <h1 style="margin-top: 25px;margin-bottom: 10px">Comments:</h1>
+        <h1 style="margin-top: 25px;margin-bottom: 10px">Customer reviews:</h1>
     <ol class="list-group ">
         {% for c in comments %}
       <li class="list-group-item d-flex justify-content-between align-items-start">

@@ -13,6 +13,7 @@ from cart import cart
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from comment.models import CommentItem
+from order.models import OrderItem, Order
 from shopOnline.forms import AddQuantity
 
 from shopOnline.models import Item, Categories
@@ -111,6 +112,9 @@ class detailView(FormMixin,DetailView):
         print("valore item")
         print(queryCommet)
         exists = CommentItem.objects.filter(customer_id=self.request.user.pk , itemComment_id=self.object.pk).exists()
+        existsOrder = OrderItem.objects.filter(order__userOrder_id=self.request.user.pk, item_id=self.object.pk).exists()
+
+        context['existsOrder']=existsOrder
         context['exists']=exists
         comment=[]
 

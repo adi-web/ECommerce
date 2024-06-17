@@ -3,14 +3,14 @@
   {
     "model": "shopOnline.categories",
     "pk": 1,
-    "fields": {"name": "Informatica"
+    "fields": {"name": "Computer"
       }
   },
 
   {
     "model": "shopOnline.categories",
     "pk": 2,
-    "fields": {"name": "Cucina"
+    "fields": {"name": "Kitchen"
       }
 
   }

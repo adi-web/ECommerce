@@ -11,8 +11,7 @@ from comment.models import CommentItem
 from shopOnline.models import Item
 
 
-class CommentCreateView(CreateView):  # new
-    # con questo indende di creare un modello di article
+class CommentCreateView(CreateView):
     model = CommentItem
     template_name = "comment_new.html"
 
