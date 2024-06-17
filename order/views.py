@@ -30,8 +30,8 @@ class processOrder(CreateView):
 
 class listOrder(ListView):
     model = Item
-    context_object_name = "ciao"
     template_name = "order.html"
+
 
 
     def post (self, request, *args, **kwargs):

@@ -43,6 +43,28 @@
       "categories": 1
       }
 
+  },
+  {
+    "model": "shopOnline.item",
+    "pk": 5,
+    "fields": {"name": "Nneque eros Nullam iaculis, elit sit amet aliquet malesuada, rhoncus magna.", "image": "images/cestiono_cucina.jpg",
+     "price":12.50,
+      "available": true,
+      "description": "Rutrum lectus  neque eros rhoncus magna, nec . Nullam iaculis, elit sit amet aliquet malesuada,vulputate urna libero sit amet ipsum. Phasellus dapibus varius viverra. Fusce ullamcorper leo quis nulla consequat, ac ultrices lorem maximus.",
+      "categories": 2
+      }
+
+  },
+  {
+    "model": "shopOnline.item",
+    "pk": 6,
+    "fields": {"name": "Elit sit amet aliquet malesuada, rhoncus magna.", "image": "images/utensili-cucina.jpg",
+     "price":9.99,
+      "available": true,
+      "description": " Nullam iaculis, elit sit amet aliquet malesuada,vulputate urna libero sit amet ipsum. Phasellus dapibus varius viverra. Fusce ullamcorper leo quis nulla consequat, ac ultrices lorem maximus.",
+      "categories": 2
+      }
+
   }
 ]
 

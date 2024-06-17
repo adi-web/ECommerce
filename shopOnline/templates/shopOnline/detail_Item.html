@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-6">
       <div class="card-body">
-        <h5 class="card-title"> {{ detail_item.name }}</h5>
+        <h2 class="card-title"> {{ detail_item.name }}</h2>
         <p class="card-text">Description: {{ detail_item.description }}</p>
        <p class="card-text">Price: {{ detail_item.price }}</p>
           {% if itemcart %}
@@ -47,24 +47,30 @@
 
 
 
-    <h1 style="margin-top: 25px;margin-bottom: 10px">Comments:</h1>
-    {% if user.is_authenticated %}
-         <a href="{% url 'comment_create' detail_item.pk %}"><button class="btn btn-primary" style="margin-bottom: 10px">Add Comment</button></a>
-    {% endif %}
 
+    {% if user.is_authenticated and exists == False %}
+
+         <a href="{% url 'comment_create' detail_item.pk %}"><button class="btn btn-primary" style="margin-bottom: 10px">Add Comment</button></a>
+
+    {% endif %}
+   {% if comments %}
+        <h1 style="margin-top: 25px;margin-bottom: 10px">Comments:</h1>
     <ol class="list-group ">
         {% for c in comments %}
       <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Customer: {{ c.customer}}</div>
+        <div class="ms-2 me-auto" style="width: 100%">
+          <div class="fw-bold" >Customer: {{ c.customer}}</div>
                 Comment: {{ c.description }}
             {% if user.is_authenticated and user.pk == c.customer.pk %}
-                <a href="{% url 'comment_delete' detail_item.pk c.pk %}">Delete</a>
+                <a href="{% url 'comment_delete' detail_item.pk c.pk %}" style="float: right;margin-left: 2px"><button class="btn btn-danger ">Delete</button></a>
+                <a href="{% url 'comment_update' detail_item.pk c.pk %}" style="float: right"><button class="btn btn-info">Change comment</button></a>
             {% endif %}
         </div>
       </li>
         {% endfor %}
     </ol>
+
+    {% endif %}
 
     </div>
     </div>

@@ -28,7 +28,6 @@ class listofItem(ListView):
         #look in the url id for categori
         pk_list = self.kwargs
 
-        #print(pk_list)
 
         #if i want all the category todisplay i do not have id in the url
         if pk_list =={}:
@@ -54,14 +53,10 @@ class listofItem(ListView):
         Cart(self.request)
         if self.request.session['cart']:
             session_cart = self.request.session['cart']
-
             for item in session_cart:
                 item_id_cart.append(int(item))
-
-            print(item_id_cart)
             context["cart_id"]=item_id_cart
 
-        print("user e ")
         print(self.request.user.pk)
         return context
 
@@ -74,10 +69,8 @@ class detailView(FormMixin,DetailView):
     context_object_name = "detail_item"
     template_name = "shopOnline/detail_Item.html"
     form_class = AddQuantity
+    queryset = Item.objects.all()
 
-    def get_queryset(self):
-
-        return Item.objects.all()
 
     #when i add the quantity i riderct to the same page html
     def get_success_url(self):
@@ -88,11 +81,6 @@ class detailView(FormMixin,DetailView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = AddQuantity(request.POST)
-        print("questo è form")
-
-
-
-        #if form.is_valid():
 
         cart = Cart(self.request)
         session_item = self.request.session['cart']
@@ -103,62 +91,32 @@ class detailView(FormMixin,DetailView):
                     if form_detail["quantiyt_item"]< session_item[id_item]['quantity']:
                         cart.add(product_id=self.object.pk, quantity=session_item[id_item]['quantity'] - 1, update_quantity=True)
                     else:
-                        print("entra")
                         cart.add(product_id=self.object.pk, quantity=session_item[id_item]['quantity']+1, update_quantity=True)
 
                 return HttpResponseRedirect(self.get_success_url())
 
         cart.add(product_id=self.object.pk, quantity=1, update_quantity=True)
-        print(request.session['cart'])
         return HttpResponseRedirect(self.get_success_url())
-        #else:
-           # return self.form_invalid(form)
+
 
 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-       # context['form'] = self.get_form()
-        #context['form']
         session_item = self.request.session['cart']
-
-        for id_item in self.request.session['cart']:
-            print("entr")
+        for id_item in session_item:
             if id_item == str(self.object.pk):
-
                 context['itemcart']=session_item[id_item]["quantity"]
-        #queryCommet=CommentItem.objects.filter(itemComment_id=self.object.pk)
-        queryCommet = CommentItem.objects.all()
-
+        queryCommet = CommentItem.objects.filter(itemComment_id=self.object.pk)
+        print("valore item")
+        print(queryCommet)
+        exists = CommentItem.objects.filter(customer_id=self.request.user.pk , itemComment_id=self.object.pk).exists()
+        context['exists']=exists
         comment=[]
+
         for c in queryCommet:
             comment.append(c)
 
-
-
-        print("dopo for")
-        for o in comment:
-            print(o.pk)
-#        context['names']=queryCommet.get().customer
         context['comments'] = comment
-        print('comments')
         print(queryCommet.values())
         return context
-
-    #take from the cart the actual quantity (or default quantity if i did not choose) to display in detail_item
-    #def get_initial(self):
-       # initial = super().get_initial()
-        #cart = Cart(self.request)
-        #session_item=self.request.session['cart']
-        #print(session_item)
-        #quantity_item=0
-        #for item_s in self.request.session['cart']:
-          #    if(self.object.pk==int(item_s)):
-                #  quantity_item=session_item[item_s]['quantity']
-                #print(session_item[item_s]['quantity'])
-
-        #print(quantity_item)
-        #initial['quantity'] = quantity_item
-        #return initial
-
-
