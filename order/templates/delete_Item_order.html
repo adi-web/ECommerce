@@ -1,0 +1,13 @@
+{% extends 'base.html'%} }
+
+{% load static %}
+{% block content %}
+
+<h1>Confirm</h1>
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to return the item ?</p>
+        <button type="submit" class="btn text-danger border-danger">Yes, return</button>
+        <a href="{% url 'detail_orders' %}"><button class="btn text-success border-success">No</button></a>  <!-- Link to cancel and go back to the order list -->
+    </form>
+
+{% endblock %}

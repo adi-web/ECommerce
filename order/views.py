@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
 from cart.cart import Cart
 from order.forms import OrderForms
@@ -23,10 +23,19 @@ class orderList(ListView):
         return itemList
 
 
+class deleteItem(DeleteView):
+    template_name = "delete_Item_order.html"
+    model = OrderItem
+    success_url = reverse_lazy('detail_orders')
+
+
 
 class processOrder(CreateView):
     form_class = OrderForms
     template_name = 'processOrder.html'
+
+
+
 
 class listOrder(ListView):
     model = Item
@@ -45,22 +54,27 @@ class listOrder(ListView):
         totpay= self.getTotPay()
         print(totpay)
         cart=Cart(self.request)
-        a = self.request.session['cart']
+        cartItem = self.request.session['cart']
         order, created = Order.objects.get_or_create(pk=modelO.pk)
         order.userOrder=self.request.user
-        order.totpay=totpay
+        order.totpay=totpay[0]
         order.save()
-        print(order.phoneNumber)
 
-        for item in a:
+
+        for item in cartItem:
            itemOrder, created = Item.objects.get_or_create(pk=item)
-           OrderItem.objects.create(item=itemOrder,order=order,quantity=a[str(item)]['quantity'])
+           OrderItem.objects.create(item=itemOrder,order=order,quantity=cartItem[str(item)]['quantity'],payQuantity=totpay[1].get(int(item))*cartItem[str(item)]['quantity'])
         cart.clear()
         return render(request,"success.html")
 
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        queryOrder=Order.objects.filter(userOrder_id=self.request.user.pk)
+        #queryOrder=Order.objects.filter(userOrder_id=self.request.user.pk)
+        queryOrder = OrderItem.objects.order_by('-order_id').select_related('order').filter(order__userOrder_id=self.request.user.pk)
+
+        print(queryOrder.values())
         context['order']=queryOrder
 
         return context
@@ -73,8 +87,10 @@ class listOrder(ListView):
 
         items = Item.objects.filter(pk__in=item_id_cart)
         totpay=0
+        payItem={}
         for i in items:
             totpay = totpay + int(itemCart[str(i.id)]['quantity']) * i.price
+            payItem[i.id]=i.price
 
 
-        return totpay
+        return totpay,payItem

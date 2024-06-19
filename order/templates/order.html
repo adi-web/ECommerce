@@ -2,33 +2,73 @@
 
 {% load static %}
 {% block content %}
-
     <h1>Your list of order</h1>
-    <div class="container-fluid" style="display: flex">
-    <div class="col-10">
-    {% for order_info in order %}
 
-    <form action="{% url 'item_order' order_info.pk %}">
-    <div class="card mb-3" style="max-width: 100%;height: 300px">
-      <div class="row g-0">
-        <div class="col-md-9">
-          <div class="card-body">
-              <h5 class="card-title">Number order: {{order_info.pk}}</h5>
-              <h3>Info order: </h3>
-            <ul>
-                <li><p class="card-text">Address to ship: {{ order_info.addressOrder }}</p></li>
-                <li> <p class="card-title">Number phone: {{order_info.phoneNumber}}</p></li>
-                <li> <p class="card-title">Date ordered: {{order_info.date}}</p></li>
-                <li> <p class="card-title">Tot paid: {{order_info.totpay}}</p></li>
-                <li> <p class="card-title">Note: {{order_info.noteOrder}}</p></li
-            </ul>
+        {% for order_info in order %}
+    <div class="container-fluid" style="display: flex;margin-bottom: 10px">
+        <div class="col-10">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row d-flex">
+                            <div class="col-1">
+                                    <span class="fw-bold">Order: {{order_info.order.pk}}</span>
+                            </div>
+                            {% if order_info.stateItem == True %}
+                            <div class="col-2">
+                                <em class="text-muted float-end">State order: <b> ordinato</b></em>
+                            </div>
+                            {% else %}
+                             <div class="col-2">
+                                <em class="text-muted float-end">State order: <b>Returned </b></em>
+                             </div>
+                            {% endif %}
+                        <div class="col-2">
+                                <em class="text-muted float-end">Tot: <b>{{ order_info.payQuantity }}</b></em>
+                            </div>
+                         <div class="col-2">
+                                <em class="text-muted float-end">Ship to: <b>{{ order_info.order.addressOrder }}</b></em>
+                            </div> <div class="col-3">
+                                <em class="text-muted float-end">Order placed : <b>{{ order_info.order.date }}</b></em>
+                            </div>
+                            <div class="col">
+                                <em class="text-muted float-end">Order by <b>{{ order_info.order.userOrder.username }}</b></em>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-3" >
+                            <a href="{% url 'detail_item' order_info.item.pk %}" class="d-inline-flex link-dark text-decoration-none mt-4">
+                              <img src={{ MEDIA_URL }}{{ order_info.item.image }} class="img-fluid" style="height: 18vw">
+                            </a>
+                      </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                               <a href="{% url 'detail_item' order_info.item.pk %}" class="d-inline-flex link-dark text-decoration-none mt-4">
+
+                                <h5 class="card-title">{{ order_info.item.name }}</h5>
+                                </a>
+                                <h5 class="card-text mt-4 ">Price item: {{ order_info.item.price }}</h5>
+                                <h5 class="card-text mt-4 ">Quantity buyed: {{ order_info.quantity }}</h5>
+                                 {% if order_info.stateItem == True %}
+                                  <a href="{% url 'detail_item' order_info.item.pk %}" class="d-inline-flex link-dark text-decoration-none mt-4">
+                                    <button class="btn btn-success">View item details</button>
+                                  </a>
+                                  <a href="{% url 'orderitem_delete' order_info.pk %}" class="d-inline-flex link-dark text-decoration-none mt-4">
+                                    <button class="btn btn-danger">Return item</button>
+                                  </a>
+                                    {% else %}
+                                     <h5 class="text-muted float-end">Your item is returned</h5>
+                                  {% endif %}
+                              </div>
+                            </div>
+                    </div>
+                  </div>
+
+
+                </div>
+                </div>
             </div>
         </div>
-    </div>
-        <input type="submit" class="btn btn-success" style="width: 10vw;margin-left: 10px" value="see detail order">
-    </div>
-    </form>
-        </div>
-        </div>
-    {% endfor %}
+            {% endfor %}
 {% endblock %}

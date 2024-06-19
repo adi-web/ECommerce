@@ -22,7 +22,7 @@
             {% if item_id == item.id  %}
                 <form action="{% url 'cart_detail' %}"  method="post">
                 {% csrf_token %}
-                        <h2>{{ form.instance.name }}</h2>  <!-- Assuming 'name' is a field in your Item model -->
+                        <h2>{{ form.instance.name }}</h2>
                 {{ form.as_p }}
                  </form>
                 <form action="{% url 'remove_item' item.pk %}"  method="post">
