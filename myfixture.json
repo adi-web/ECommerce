@@ -25,7 +25,6 @@
     "pk": 3,
     "fields": {"name": "Nullam id neque rhoncus ex porta porttitor vel et est. Pellentesque efficitur tortor enim.", "image": "images/mouse.jpg",
     "price":10.50,
-      "available": true,
       "description": "Nullam id neque rhoncus ex porta porttitor vel et est. Pellentesque efficitur tortor enim, a consequat felis faucibus tempus. Nunc id malesuada mi. Ut iaculis mi non volutpat volutpat.",
       "categories": 1
       }
@@ -36,7 +35,6 @@
     "pk": 4,
     "fields": {"name": "Ut in rutrum lectus. Nullam iaculis, elit sit amet aliquet malesuada, neque eros rhoncus magna.", "image": "images/tastiera.jpg",
      "price":8.70,
-      "available": true,
       "description": "Ut in rutrum lectus. Nullam iaculis, elit sit amet aliquet malesuada, neque eros rhoncus magna, nec vulputate urna libero sit amet ipsum. Phasellus dapibus varius viverra. Fusce ullamcorper leo quis nulla consequat, ac ultrices lorem maximus.",
       "categories": 1
       }
@@ -47,7 +45,6 @@
     "pk": 5,
     "fields": {"name": "Nneque eros Nullam iaculis, elit sit amet aliquet malesuada, rhoncus magna.", "image": "images/cestiono_cucina.jpg",
      "price":12.50,
-      "available": true,
       "description": "Rutrum lectus  neque eros rhoncus magna, nec . Nullam iaculis, elit sit amet aliquet malesuada,vulputate urna libero sit amet ipsum. Phasellus dapibus varius viverra. Fusce ullamcorper leo quis nulla consequat, ac ultrices lorem maximus.",
       "categories": 2
       }
@@ -58,7 +55,6 @@
     "pk": 6,
     "fields": {"name": "Elit sit amet aliquet malesuada, rhoncus magna.", "image": "images/utensili-cucina.jpg",
      "price":9.99,
-      "available": true,
       "description": " Nullam iaculis, elit sit amet aliquet malesuada,vulputate urna libero sit amet ipsum. Phasellus dapibus varius viverra. Fusce ullamcorper leo quis nulla consequat, ac ultrices lorem maximus.",
       "categories": 2
       }
