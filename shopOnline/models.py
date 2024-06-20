@@ -10,8 +10,7 @@ class Item(models.Model):
     name = models.CharField(max_length=1200, db_index=True)
     image = models.ImageField(null=True, upload_to='images/', blank=True)
     price = models.FloatField(default=0)
-    available = models.BooleanField(default=True)
-    description = models.CharField(default="csdc", max_length=10000, db_index=True)
+    description = models.CharField(blank=True, max_length=10000, db_index=True)
     categories=models.ForeignKey(Categories,on_delete=models.CASCADE,default=None)
 
 

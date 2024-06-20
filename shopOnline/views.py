@@ -16,7 +16,7 @@ from comment.models import CommentItem
 from order.models import OrderItem, Order
 from shopOnline.forms import AddQuantity
 
-from shopOnline.models import Item, Categories
+from shopOnline.models import Item
 
 
 class listofItem(ListView):
@@ -26,9 +26,8 @@ class listofItem(ListView):
 
     def get_queryset(self, *args, **kwargs):
 
-        #look in the url id for categori
+        #look in the url id for category
         pk_list = self.kwargs
-
 
         #if i want all the category todisplay i do not have id in the url
         if pk_list =={}:
@@ -41,6 +40,7 @@ class listofItem(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         pk_list = self.kwargs
         if pk_list =={}:
             context["nameCategory"]="All Category"
@@ -78,7 +78,7 @@ class detailView(FormMixin,DetailView):
         return reverse('detail_item', kwargs={'pk': self.object.pk})
 
 
-    #add new Quantity i take the quantity and i save in the session cart
+    #add new Quantity , i take the quantity and i save in the session cart
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = AddQuantity(request.POST)
@@ -105,22 +105,20 @@ class detailView(FormMixin,DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         session_item = self.request.session['cart']
+
         for id_item in session_item:
             if id_item == str(self.object.pk):
                 context['itemcart']=session_item[id_item]["quantity"]
+
         queryCommet = CommentItem.objects.filter(itemComment_id=self.object.pk)
-        print("valore item")
-        print(queryCommet)
         exists = CommentItem.objects.filter(customer_id=self.request.user.pk , itemComment_id=self.object.pk).exists()
         existsOrder = OrderItem.objects.filter(order__userOrder_id=self.request.user.pk, item_id=self.object.pk).exists()
 
         context['existsOrder']=existsOrder
         context['exists']=exists
         comment=[]
-
         for c in queryCommet:
             comment.append(c)
 
         context['comments'] = comment
-        print(queryCommet.values())
         return context

@@ -12,6 +12,7 @@ from shopOnline.models import Item
 
 
 class CommentCreateView(CreateView):
+
     model = CommentItem
     template_name = "comment_new.html"
 
@@ -29,8 +30,6 @@ class CommentCreateView(CreateView):
 
     def form_valid(self, form):
         item_id = self.kwargs.get('pk')
-        print("itemid")
-        print(item_id)
         try:
             item = Item.objects.get(pk=item_id)
             print(item_id)
@@ -41,11 +40,13 @@ class CommentCreateView(CreateView):
         return super().form_valid(form)
 
 
-class CommentDeleteView(DeleteView):  # new
+
+class CommentDeleteView(DeleteView):
     model = CommentItem
     template_name = "comment_delete.html"
     def get_success_url(self):
         return reverse_lazy('detail_item', kwargs={'pk': self.kwargs['itemId']})
+
 
 
 class CommentUpdateView(UpdateView):

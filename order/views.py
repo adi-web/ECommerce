@@ -23,6 +23,9 @@ class orderList(ListView):
         return itemList
 
 
+
+
+
 class deleteItem(DeleteView):
     template_name = "delete_Item_order.html"
     model = OrderItem
@@ -30,9 +33,13 @@ class deleteItem(DeleteView):
 
 
 
+
+
 class processOrder(CreateView):
     form_class = OrderForms
     template_name = 'processOrder.html'
+
+
 
 
 
@@ -48,11 +55,8 @@ class listOrder(ListView):
         form=OrderForms(request.POST)
         if form.is_valid():
             modelO=form.save()
-            print(modelO.pk)
 
-        print("entrato")
         totpay= self.getTotPay()
-        print(totpay)
         cart=Cart(self.request)
         cartItem = self.request.session['cart']
         order, created = Order.objects.get_or_create(pk=modelO.pk)
@@ -61,9 +65,11 @@ class listOrder(ListView):
         order.save()
 
 
+        # save in the DB the info of the order an item
         for item in cartItem:
            itemOrder, created = Item.objects.get_or_create(pk=item)
            OrderItem.objects.create(item=itemOrder,order=order,quantity=cartItem[str(item)]['quantity'],payQuantity=totpay[1].get(int(item))*cartItem[str(item)]['quantity'])
+
         cart.clear()
         return render(request,"success.html")
 
@@ -71,13 +77,12 @@ class listOrder(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #queryOrder=Order.objects.filter(userOrder_id=self.request.user.pk)
         queryOrder = OrderItem.objects.order_by('-order_id').select_related('order').filter(order__userOrder_id=self.request.user.pk)
-
-        print(queryOrder.values())
         context['order']=queryOrder
 
         return context
+
+
 
     def getTotPay(self):
         itemCart = self.request.session['cart']
@@ -91,6 +96,5 @@ class listOrder(ListView):
         for i in items:
             totpay = totpay + int(itemCart[str(i.id)]['quantity']) * i.price
             payItem[i.id]=i.price
-
 
         return totpay,payItem

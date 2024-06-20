@@ -12,35 +12,6 @@ from .cart import Cart
 from .forms import CartAddProductForm
 
 
-
-def cart_add(request, product_id):
-    cart = Cart(request)
-    product_id = get_object_or_404(Item, id=product_id)
-    print(product_id.name)
-
-    #form = CartAddProductForm(request.POST)
-    #if form.is_valid():
-     #   cd = form.cleaned_data
-    cart.add(product_id=product_id, quantity=1, update_quantity=False)
-    a=request.session['cart']
-    p=[]
-    for item_id in a:
-        p.append(item_id)
-
-    print(p)
-    return HttpResponse("ok")
-
-
-
-def cart_remove(request, product_id):
-    print(product_id)
-    cart = Cart(request)
-    product = get_object_or_404(Item, id=product_id)
-    cart.remove(product)
-    return reverse('cart_detail')
-    #return HttpResponse("ok")
-
-
 class removeItem(View):
 
     def get_success_url(self):
@@ -48,7 +19,6 @@ class removeItem(View):
 
     def post(self, request, *args, **kwargs):
         self.kwargs['product_id']
-        print(self.kwargs['product_id'])
         cart = Cart(request)
         product = get_object_or_404(Item, id=self.kwargs['product_id'])
         cart.remove(product)
@@ -57,10 +27,7 @@ class removeItem(View):
 
 
 class detailCart(FormMixin,View):
-    #context_object_name = "list_cart"
-   #template_name = "cart/detail_cart.html"
     form_class = CartAddProductForm
-
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data()
@@ -69,42 +36,21 @@ class detailCart(FormMixin,View):
     def get_success_url(self):
         return reverse('cart_detail')
 
-    #def get_queryset(self):
-       # Cart(self.request)
-        #a=self.request.session['cart']
-       # item_id=[]
-       # for item in a:
-         #   item_id.append(int(item))
-
-       # queryset=Item.objects.filter(pk__in=item_id)
-
-        #print("ciao")
-      #  return queryset
-
-
-
-        # add new Quantity i take the quantity and i save in the session cart
 
     def post(self, request, *args, **kwargs):
-        #self.object = self.get_object()
 
         form = CartAddProductForm(request.POST)
         if form.is_valid():
             cart = Cart(self.request)
             form_detail = form.cleaned_data
-            print(form_detail)
             cart.add(product_id=form_detail["item_id"], quantity=form_detail["quantity"], update_quantity=True)
-            print(request.session['cart'])
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.form_invalid(form)
 
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # Retrieve items from the database (or from wherever you get them)
         Cart(self.request)
         a = self.request.session['cart']
 

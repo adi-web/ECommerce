@@ -5,6 +5,8 @@ from django.db import models
 from shopOnline.models import Item
 
 
+# model for the comment i have foreignkey with customer and the item
+
 class CommentItem(models.Model):
     description=models.CharField(max_length=1000,db_index=True,blank=True)
     customer = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default=0)

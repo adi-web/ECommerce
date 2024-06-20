@@ -11,8 +11,8 @@
     <div class="card mb-3" style="max-width: 100%;height: 250px">
       <div class="row g-0">
         <div class="col-md-3">
-          <img src={{ MEDIA_URL }}{{ item.image }} class="img-fluid" alt="..." style="height:200px;width: -webkit-fill-available">
-        </div>
+        <img src={{ MEDIA_URL }}{{ item.image }} class="img-fluid" alt="..." style="height:200px;width: -webkit-fill-available">
+      </div>
         <div class="col-md-9">
           <div class="card-body">
             <h5 class="card-title">{{ item.name }}</h5>
@@ -21,41 +21,32 @@
             <div>
             {% if item_id == item.id  %}
                 <form action="{% url 'cart_detail' %}"  method="post">
-                {% csrf_token %}
-                        <h2>{{ form.instance.name }}</h2>
-                {{ form.as_p }}
-                 </form>
+                    {% csrf_token %}
+                    <h2>{{ form.instance.name }}</h2>
+                    {{ form.as_p }}
+                </form>
                 <form action="{% url 'remove_item' item.pk %}"  method="post">
                     {% csrf_token %}
                      <input type="submit" href={% url 'remove_item' item.pk %} class="btn btn-danger style="float: right" value="Delete Item From Cart">
-                    </form>
+                 </form>
             {% endif %}
-
             </div>
         {% endfor %}
           </div>
         </div>
       </div>
     </div>
-
-        {% endfor %}
+      {% endfor %}
     </div>
     <div class="col-2 ms-4" style="position: fixed;right: 0">
-
     <h5>Total to pay: {{ pay }}</h5>
        <form action="{% url 'process_cart' %}" >
-                {% csrf_token %}
-                         <input class="btn btn-primary"   type="submit" value="Process the order" >
-
-                 </form>
-
-
-
-
+            {% csrf_token %}
+            <input class="btn btn-primary"   type="submit" value="Process the order" >
+       </form>
     </div>
-
 </div>
-        {% else %}
+      {% else %}
         <h4>Your cart is empty</h4>
       {% endif %}
 {% endblock %}

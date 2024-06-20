@@ -1,6 +1,10 @@
 
 from django.conf import settings
 
+# class tha i use to save or create a session for the cart
+# there is the method add for add to the session an item with the quantity
+# save is to save the session , clear to delete the session , remove is for remove an item from the session
+
 class Cart():
 
     def __init__(self, request):

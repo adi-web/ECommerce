@@ -4,10 +4,12 @@
 {% block content %}
 
 <h1>Confirm</h1>
-    <form method="post">{% csrf_token %}
-        <p>Are you sure you want to return the item ?</p>
+    <p>Are you sure you want to return the item ?</p>
+      <div style="display: inline-flex">
+        <form method="post">{% csrf_token %}
         <button type="submit" class="btn text-danger border-danger">Yes, return</button>
-        <a href="{% url 'detail_orders' %}"><button class="btn text-success border-success">No</button></a>  <!-- Link to cancel and go back to the order list -->
-    </form>
+        </form>
+        <a href="{% url 'detail_orders' %}"><button class="btn text-success border-success ms-4">No</button></a>
+      </div>
 
 {% endblock %}
