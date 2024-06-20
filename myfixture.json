@@ -5,7 +5,6 @@
     "pk": 1,
     "fields": {"name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit", "image": "images/covercomputer.jpg",
      "price":15.99,
-      "available": true,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel est a justo malesuada porta. Ut congue quam ut tempus sagittis. Pellentesque elit quam, feugiat venenatis tortor sit amet, sollicitudin varius nulla.",
       "categories": 1
       }
@@ -16,7 +15,6 @@
     "pk": 2,
     "fields": {"name": "Vivamus gravida, metus id dignissim molestie, nisl risus accumsan nibh.", "image": "images/impastatrice.jpg",
        "price":100.50,
-      "available": true,
       "description": "Vivamus gravida, metus id dignissim molestie, nisl risus accumsan nibh, sed blandit metus mi ut mi. Donec vestibulum suscipit leo, ac aliquet erat rutrum in. Donec vel velit eget nulla auctor venenatis. Etiam ac lorem pharetra, auctor magna non, maximus urna. Vestibulum non lacus id enim rutrum vulputate.",
       "categories": 2
       }
