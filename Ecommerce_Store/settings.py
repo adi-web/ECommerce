@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['ecommerce-production-94fc.up.railway.app',"127.0.0.1"]
 CSRF_TRUSTED_ORIGINS=['https://ecommerce-production-94fc.up.railway.app','https://127.0.0.1']
-#//python manage.py loaddata my_app/fixtures.json
-#python manage.py flush
 
 
 SECRET_KEY = os.environ.get(
@@ -135,21 +133,15 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = "static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "shop"
 LOGOUT_REDIRECT_URL = "shop"
 
 
-SESSION_EXPIRE_SECONDS = 2000 # Expire after 30 minutes
-SESSION_TIMEOUT_REDIRECT = 'shop' # Add your URL
+SESSION_EXPIRE_SECONDS = 2000 
+SESSION_TIMEOUT_REDIRECT = 'shop' 
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE=False
 
@@ -173,5 +165,3 @@ DATABASES['default'].update(db_from_env)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-#AUTH_USER_MODEL = "accounts.CustomUser"
