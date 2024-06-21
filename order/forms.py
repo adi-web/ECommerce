@@ -14,3 +14,10 @@ class OrderForms(forms.ModelForm):
             "addressOrder": "Address to ship",
             "noteOrder": "Note for the rider",
         }
+
+    def __init__(self, *args, **kwargs):
+        super(OrderForms, self).__init__(*args, **kwargs)
+        self.fields['phoneNumber'].required = True
+        self.fields['addressOrder'].required = True
+
+
