@@ -48,8 +48,8 @@
 
                                 <h5 class="card-title">{{ order_info.item.name }}</h5>
                                 </a>
-                                <h5 class="card-text mt-4 ">Price of the product: {{ order_info.item.price }}</h5>
-                                <h5 class="card-text mt-4 ">Quantity Purchased: {{ order_info.quantity }}</h5>
+                                <h5 class="card-text mt-4 ">Price of the product: {{ order_info.item.price }} $</h5>
+                                <h5 class="card-text mt-4 ">Quantity purchased: {{ order_info.quantity }}</h5>
                                  {% if order_info.stateItem == True %}
                                   <a href="{% url 'detail_item' order_info.item.pk %}" class="d-inline-flex link-dark text-decoration-none mt-4">
                                     <button class="btn btn-success">View item details</button>
