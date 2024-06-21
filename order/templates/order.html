@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row d-flex">
-                            <div class="col-1">
+                            <div class="col-2">
                                     <span class="fw-bold">Order number: {{order_info.order.pk}}</span>
                             </div>
                             {% if order_info.stateItem == True %}
@@ -50,6 +50,9 @@
                                 </a>
                                 <h5 class="card-text mt-4 ">Price of the product: {{ order_info.item.price }} $</h5>
                                 <h5 class="card-text mt-4 ">Quantity purchased: {{ order_info.quantity }}</h5>
+                                 {% if order_info.order.noteOrder %}
+                                    <h5 class="card-text mt-4 ">Note for this order: {{ order_info.order.noteOrder }}</h5>
+                                  {% endif%}
                                  {% if order_info.stateItem == True %}
                                   <a href="{% url 'detail_item' order_info.item.pk %}" class="d-inline-flex link-dark text-decoration-none mt-4">
                                     <button class="btn btn-success">View item details</button>
