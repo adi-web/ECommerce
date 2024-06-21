@@ -4,6 +4,9 @@
 - **Create Account**: Users can create a new account.
 - **Login**: Users can log in with an existing account.
 - **Change Password**: Users can change their password.
+- **Test the Web-App**: Users who want to test the web-app can use the following credentials:
+  - Username: guest_user
+  - Password: guest_password
 
 ## Shopping Features
 - **Add to Cart**: 
