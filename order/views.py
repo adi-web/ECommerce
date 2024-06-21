@@ -25,7 +25,6 @@ class orderList(ListView):
 
 
 
-
 class deleteItem(DeleteView):
     template_name = "delete_Item_order.html"
     model = OrderItem
@@ -34,55 +33,32 @@ class deleteItem(DeleteView):
 
 
 
-
 class processOrder(CreateView):
     form_class = OrderForms
     template_name = 'processOrder.html'
 
+    def post(self, request, *args, **kwargs):
 
-
-
-
-
-class listOrder(ListView):
-    model = Item
-    template_name = "order.html"
-
-
-
-    def post (self, request, *args, **kwargs):
-
-        form=OrderForms(request.POST)
+        form = OrderForms(request.POST)
         if form.is_valid():
-            modelO=form.save()
+            modelO = form.save()
 
-        totpay= self.getTotPay()
-        cart=Cart(self.request)
+        totpay = self.getTotPay()
+        cart = Cart(self.request)
         cartItem = self.request.session['cart']
         order, created = Order.objects.get_or_create(pk=modelO.pk)
-        order.userOrder=self.request.user
-        order.totpay=totpay[0]
+        order.userOrder = self.request.user
+        order.totpay = totpay[0]
         order.save()
-
 
         # save in the DB the info of the order an item
         for item in cartItem:
-           itemOrder, created = Item.objects.get_or_create(pk=item)
-           OrderItem.objects.create(item=itemOrder,order=order,quantity=cartItem[str(item)]['quantity'],payQuantity=totpay[1].get(int(item))*cartItem[str(item)]['quantity'])
+            itemOrder, created = Item.objects.get_or_create(pk=item)
+            OrderItem.objects.create(item=itemOrder, order=order, quantity=cartItem[str(item)]['quantity'],
+                                     payQuantity=totpay[1].get(int(item)) * cartItem[str(item)]['quantity'])
 
         cart.clear()
-        return render(request,"success.html")
-
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        queryOrder = OrderItem.objects.order_by('-order_id').select_related('order').filter(order__userOrder_id=self.request.user.pk)
-        context['order']=queryOrder
-
-        return context
-
-
+        return render(request, "success.html")
 
     def getTotPay(self):
         itemCart = self.request.session['cart']
@@ -91,10 +67,24 @@ class listOrder(ListView):
             item_id_cart.append(int(item))
 
         items = Item.objects.filter(pk__in=item_id_cart)
-        totpay=0
-        payItem={}
+        totpay = 0
+        payItem = {}
         for i in items:
             totpay = totpay + int(itemCart[str(i.id)]['quantity']) * i.price
-            payItem[i.id]=i.price
+            payItem[i.id] = i.price
 
-        return totpay,payItem
+        return totpay, payItem
+
+
+
+class listOrder(ListView):
+    model = Item
+    template_name = "order.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryOrder = OrderItem.objects.order_by('-order_id').select_related('order').filter(order__userOrder_id=self.request.user.pk)
+        context['order']=queryOrder
+
+        return context
+
